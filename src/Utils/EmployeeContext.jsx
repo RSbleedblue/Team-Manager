@@ -4,7 +4,7 @@ import {createContext} from 'react';
 const EmployeeContext = createContext();
 
 const initialState = {
-    employee : [{}]
+    employee : []
 };
 
 const employeeReducer = (state,action) =>{
@@ -19,6 +19,12 @@ const employeeReducer = (state,action) =>{
                 ...state,
                 employee : state.employee.filter(each => each.id !== action.payload),
             };
+        case "SORT_EMPLOYEE" :
+            const sortedEmployee = state.employee.sort((a,b)=>a.age - b.age)
+            return {
+                ...state,
+                employee : sortedEmployee,
+            }
         default:
             return state;
     }
