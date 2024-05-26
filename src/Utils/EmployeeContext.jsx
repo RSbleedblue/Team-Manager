@@ -10,6 +10,10 @@ const initialState = {
 const employeeReducer = (state,action) =>{
     switch(action.type){
         case "ADD_EMPLOYEE" : 
+            if(isPresent(state.employee,action.payload.id)){
+                alert("Already Added!")
+                return state;
+            }
             return {
                 ...state,
                 employee: [...state.employee, action.payload],
@@ -28,6 +32,9 @@ const employeeReducer = (state,action) =>{
         default:
             return state;
     }
+}
+function isPresent(employees,id){
+    return employees.some(employee => employee.id === id);
 }
 
 export const EmployeeProvider = ({children}) =>  {
